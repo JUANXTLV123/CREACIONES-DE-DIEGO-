@@ -1,0 +1,692 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ff72b6">
+<title>Jasmin 👑 | Mi pequeño universo</title>
+
+<style>
+:root {
+  --pink: #ff4fa3;
+  --light-pink: #ffe3f1;
+  --purple: #a78bfa;
+  --dark: #68124b;
+  --white: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+  background: linear-gradient(-45deg,
+    #ff6eb4, #b69aff, #ff9aaf, #fbc2eb, #d8b4fe);
+  background-size: 400% 400%;
+  animation: fondo 14s ease infinite;
+}
+
+@keyframes fondo {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+button { font: inherit; }
+
+button:focus-visible, a:focus-visible {
+  outline: 3px solid #68124b;
+  outline-offset: 4px;
+}
+
+main {
+  width: min(94%, 780px);
+  margin: 25px auto;
+  padding: 26px 20px 32px;
+  background: #ffffff26;
+  border: 1px solid #ffffff80;
+  border-radius: 30px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 15px 50px #68124b25;
+  position: relative;
+  z-index: 2;
+}
+
+.crown {
+  font-size: 2.4rem;
+  animation: flotar 2s ease-in-out infinite alternate;
+}
+
+@keyframes flotar {
+  to { transform: translateY(-8px) rotate(5deg); }
+}
+
+h1 {
+  font-size: clamp(2.1rem, 8vw, 4rem);
+  margin: 8px 0;
+  text-shadow: 0 4px 18px #8d145e65;
+}
+
+.subtitle {
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.photo {
+  width: min(75%, 290px);
+  height: 290px;
+  object-fit: cover;
+  border: 5px solid white;
+  border-radius: 28px;
+  box-shadow: 0 10px 35px #68124b40;
+  background: #ffffff40;
+  transition: transform .4s;
+}
+
+.photo:hover { transform: scale(1.035) rotate(-1deg); }
+
+#photoHelp {
+  display: none;
+  color: var(--dark);
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.intro {
+  max-width: 560px;
+  margin: 20px auto;
+  line-height: 1.8;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 17px;
+  background: white;
+  color: #821653;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 5px 15px #68124b25;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px #68124b35;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, #ff2e93, #b34de5);
+  color: white;
+}
+
+.card {
+  max-width: 620px;
+  margin: 24px auto;
+  padding: 22px;
+  background: #ffffffeb;
+  color: #48163f;
+  border-radius: 24px;
+  text-align: left;
+  box-shadow: 0 8px 25px #68124b15;
+}
+
+.card h2 { text-align: center; margin-top: 0; }
+
+.note {
+  color: #80516f;
+  font-size: .9rem;
+  line-height: 1.6;
+}
+
+.song {
+  padding: 17px 0;
+  border-top: 1px solid #efc6df;
+}
+
+.song-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.song audio {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.song-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.song-buttons .btn { padding: 9px 15px; }
+
+.now-playing {
+  text-align: center;
+  background: #fff0f8;
+  border-radius: 16px;
+  padding: 13px;
+  margin: 15px 0;
+  line-height: 1.7;
+}
+
+.equalizer {
+  display: inline-flex;
+  height: 24px;
+  align-items: center;
+  gap: 3px;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.equalizer span {
+  display: block;
+  width: 4px;
+  height: 5px;
+  border-radius: 5px;
+  background: #ff4fa3;
+}
+
+body.music-playing .equalizer span {
+  animation: equalizar .55s ease-in-out infinite alternate;
+}
+
+.equalizer span:nth-child(2) { animation-delay: .15s; }
+.equalizer span:nth-child(3) { animation-delay: .3s; }
+.equalizer span:nth-child(4) { animation-delay: .1s; }
+
+@keyframes equalizar {
+  from { height: 5px; }
+  to { height: 23px; }
+}
+
+.surprise {
+  display: none;
+  margin: 18px auto;
+  max-width: 570px;
+  padding: 22px;
+  background: white;
+  color: #a21b65;
+  border-radius: 22px;
+  line-height: 1.8;
+  box-shadow: 0 8px 25px #68124b25;
+}
+
+.surprise.show {
+  display: block;
+  animation: aparecer .55s ease;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(15px) scale(.92); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.envelope-area { text-align: center; }
+
+.envelope {
+  display: block;
+  width: 150px;
+  height: 100px;
+  margin: 25px auto;
+  position: relative;
+  border: 0;
+  border-radius: 10px;
+  background: #ff8cbd;
+  box-shadow: 0 8px 20px #68124b30;
+  cursor: pointer;
+  font-size: 2.4rem;
+  transition: transform .3s;
+}
+
+.envelope:hover { transform: scale(1.08) rotate(-2deg); }
+
+.letter {
+  display: none;
+  margin-top: 20px;
+  padding: 23px;
+  background: #fffafc;
+  border: 1px solid #ffd1e7;
+  border-radius: 15px;
+  color: #68124b;
+  text-align: left;
+  line-height: 1.9;
+  white-space: pre-line;
+}
+
+.letter.show { display: block; animation: aparecer .7s ease; }
+
+.magic-message {
+  min-height: 65px;
+  display: grid;
+  place-items: center;
+  background: #fff0f8;
+  padding: 15px;
+  border-radius: 18px;
+  text-align: center;
+  line-height: 1.7;
+  font-weight: bold;
+  margin: 16px 0;
+}
+
+.floating {
+  position: fixed;
+  z-index: 10;
+  bottom: -50px;
+  pointer-events: none;
+  animation: subir linear forwards;
+  filter: drop-shadow(0 2px 5px #8a145b30);
+}
+
+@keyframes subir {
+  0% { transform: translateY(0) rotate(0); opacity: 0; }
+  12% { opacity: 1; }
+  100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+}
+
+footer {
+  margin-top: 26px;
+  line-height: 1.8;
+  font-size: .9rem;
+}
+
+footer .footer-heart { font-size: 1.4rem; }
+
+@media(max-width: 480px) {
+  main { padding: 20px 12px 28px; margin: 12px auto; }
+  .photo { height: 230px; }
+  .card { padding: 16px; }
+  .btn { padding: 11px 14px; font-size: .92rem; }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<main>
+  <div class="crown">💗 ✨ 👑 ✨ 💗</div>
+  <h1>Jasmin, la más vistera</h1>
+  <p class="subtitle">Bienvenida a tu pequeño universo de magia, música y sonrisas. 🦋</p>
+
+  <img class="photo"
+       src="jasmin-foto.png"
+       alt="Foto de Jasmin"
+       onerror="this.style.display='none';document.getElementById('photoHelp').style.display='block'">
+
+  <p id="photoHelp">
+    Coloca la foto llamada <b>jasmin-foto.png</b> en la misma carpeta que este HTML.
+  </p>
+
+  <p class="intro">
+    Hay personas que hacen más bonitos los momentos sencillos.
+    Este pequeño rincón está lleno de detalles para recordarte
+    que siempre hay motivos para sonreír. 💖
+  </p>
+
+  <div class="buttons">
+    <button class="btn primary" onclick="lluviaCorazones(35)">
+      💖 Lluvia de amor
+    </button>
+    <button class="btn" onclick="abrirSorpresa()">
+      🎁 Una sorpresa
+    </button>
+    <button class="btn" onclick="nuevoMensaje()">
+      🌸 Mensaje mágico
+    </button>
+  </div>
+
+  <section class="card">
+    <h2>🎶 Nuestro rincón musical</h2>
+    <p class="note">
+      Elige una canción y disfruta. Puedes reproducirla, pausarla
+      y avanzar o retroceder desde los controles.
+    </p>
+
+    <div class="now-playing">
+      <strong id="estadoMusica">🎧 Elige la banda sonora de tu momento</strong>
+      <div class="equalizer" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="song">
+      <div class="song-title">💗 1. Traicionera — La Única Tropical</div>
+      <audio id="audio1" controls preload="metadata">
+        <source src="traicionera-unica-tropical.mp3" type="audio/mpeg">
+        Tu navegador no puede reproducir este audio.
+      </audio>
+      <div class="song-buttons">
+        <button class="btn" onclick="reproducirCancion(0)">▶ Reproducir</button>
+        <button class="btn" onclick="pausarCanciones()">⏸ Pausar música</button>
+      </div>
+      <p class="note" id="estado1">Preparada para reproducir.</p>
+    </div>
+
+    <div class="song">
+      <div class="song-title">💜 2. Traicionera — Sebastián Yatra</div>
+      <audio id="audio2" controls preload="metadata">
+        <source src="traicionera-sebastian-yatra.mp3" type="audio/mpeg">
+        Tu navegador no puede reproducir este audio.
+      </audio>
+      <div class="song-buttons">
+        <button class="btn" onclick="reproducirCancion(1)">▶ Reproducir</button>
+        <button class="btn" onclick="pausarCanciones()">⏸ Pausar música</button>
+      </div>
+      <p class="note" id="estado2">Preparada para reproducir.</p>
+    </div>
+
+    <p class="note">
+      Si no se escucha una canción, verifica que su archivo exista
+      en la carpeta del proyecto y que el nombre coincida exactamente.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>💌 Una carta para Jasmin</h2>
+    <p class="note" style="text-align:center">
+      Hay algo bonito esperando dentro de este sobre...
+    </p>
+
+    <div class="envelope-area">
+      <button class="envelope" id="botonCarta"
+              onclick="alternarCarta()"
+              aria-expanded="false"
+              aria-controls="cartaSecreta"
+              aria-label="Abrir o cerrar la carta">
+        💌
+      </button>
+      <p><strong>Toca el sobre para descubrir tu mensaje</strong></p>
+    </div>
+
+    <div class="letter" id="cartaSecreta">
+      <strong>Para Jasmin, la más vistera: 💗</strong>
+
+      Quería dejarte un detalle diferente, algo que no se encuentre
+      todos los días. Por eso este pequeño espacio tiene música,
+      colores, corazones y algunas sorpresas.
+
+      Ojalá que cuando lo visites encuentres una razón para sonreír,
+      que cada canción te acompañe en un buen momento y que nunca
+      te falten sueños, alegría y personas que te aprecien.
+
+      No olvides lo especial que eres y sigue brillando a tu manera.
+
+      Con mucho cariño. 🌷✨
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>✨ Tu rincón de buenos deseos</h2>
+    <p class="note">
+      Pulsa el botón y descubre un pequeño mensaje para tu día.
+    </p>
+
+    <div class="magic-message" id="mensajeMagico" aria-live="polite">
+      🌸 Que hoy te suceda algo bonito, Jasmin.
+    </div>
+
+    <div class="buttons">
+      <button class="btn primary" onclick="nuevoMensaje()">
+        🌷 Otro mensaje
+      </button>
+      <button class="btn" onclick="pedirDeseo()">
+        ⭐ Pedir un deseo
+      </button>
+      <button class="btn" onclick="lluviaCorazones(55)">
+        💖 ¡Llenar todo de amor!
+      </button>
+    </div>
+  </section>
+
+  <div class="surprise" id="sorpresa" aria-live="polite">
+    <h2>🎉 ¡Sorpresa, Jasmin! 💖</h2>
+    <p>
+      Si este pequeño universo pudiera darte un regalo,
+      sería una colección infinita de momentos felices,
+      canciones bonitas, abrazos sinceros y motivos para sonreír.
+    </p>
+    <p>✨ Que nunca dejes de brillar, reina. 👑</p>
+    <button class="btn primary" onclick="lluviaCorazones(45)">
+      💗 Celebrar
+    </button>
+  </div>
+
+  <div class="buttons">
+    <button class="btn" onclick="lluviaCorazones(20)">
+      🦋 Más mariposas y corazones
+    </button>
+    <button class="btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      ⬆️ Volver al inicio
+    </button>
+  </div>
+
+  <footer>
+    <div class="footer-heart">💗 ✨ 💗</div>
+    Hecho con cariño para Jasmin 👑
+    <br>Que nunca te falten música, magia y sonrisas. 🌷
+  </footer>
+</main>
+
+<script>
+"use strict";
+
+// MENSAJES INTERACTIVOS
+const mensajes = [
+  "🌷 Jasmin, que nunca te falten motivos para sonreír.",
+  "💖 Tu manera de ser es parte de lo que te hace especial.",
+  "✨ Que hoy te encuentre una sorpresa bonita.",
+  "🦋 Sigue brillando a tu manera; no necesitas parecerte a nadie.",
+  "👑 La corona es tuya, reina de las ocurrencias.",
+  "🌸 Que la felicidad te encuentre incluso en los días sencillos.",
+  "💗 A veces, los pequeños detalles se convierten en grandes recuerdos.",
+  "🎶 Que siempre tengas una canción que alegre tu día."
+];
+
+const deseos = [
+  "⭐ Que ese sueño que guardas en secreto se acerque un poquito más.",
+  "🌈 Que llegue una alegría inesperada a tu vida.",
+  "💫 Que tengas fuerza para tus retos y alegría para tus logros.",
+  "💖 Que siempre encuentres razones para creer en las cosas bonitas.",
+  "🦋 Que nunca pierdas esa ilusión que te hace seguir adelante."
+];
+
+let ultimoMensaje = -1;
+
+function mensajeAleatorio(lista) {
+  if (lista.length === 1) return lista[0];
+
+  let indice;
+  do {
+    indice = Math.floor(Math.random() * lista.length);
+  } while (indice === ultimoMensaje);
+
+  ultimoMensaje = indice;
+  return lista[indice];
+}
+
+function nuevoMensaje() {
+  const caja = document.getElementById("mensajeMagico");
+  caja.textContent = mensajeAleatorio(mensajes);
+
+  caja.animate(
+    [
+      { opacity: 0, transform: "translateY(8px) scale(.96)" },
+      { opacity: 1, transform: "translateY(0) scale(1)" }
+    ],
+    { duration: 400, easing: "ease-out" }
+  );
+
+  lluviaCorazones(12);
+}
+
+function pedirDeseo() {
+  document.getElementById("mensajeMagico").textContent =
+    mensajeAleatorio(deseos);
+  lluviaCorazones(20);
+}
+
+function abrirSorpresa() {
+  const caja = document.getElementById("sorpresa");
+  caja.classList.add("show");
+  lluviaCorazones(35);
+  caja.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+// CARTA SECRETA
+function alternarCarta() {
+  const carta = document.getElementById("cartaSecreta");
+  const boton = document.getElementById("botonCarta");
+  const abierta = carta.classList.toggle("show");
+
+  boton.textContent = abierta ? "💖" : "💌";
+  boton.setAttribute("aria-expanded", String(abierta));
+
+  if (abierta) {
+    lluviaCorazones(15);
+  }
+}
+
+// LLUVIA DE CORAZONES Y BRILLOS
+function lluviaCorazones(cantidad = 20) {
+  const simbolos = ["💗", "💖", "💕", "💘", "❤️", "✨", "🌸", "🦋"];
+
+  for (let i = 0; i < cantidad; i++) {
+    const elemento = document.createElement("span");
+    elemento.className = "floating";
+    elemento.textContent =
+      simbolos[Math.floor(Math.random() * simbolos.length)];
+
+    elemento.style.left = Math.random() * 100 + "vw";
+    elemento.style.fontSize = (18 + Math.random() * 25) + "px";
+    elemento.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+    document.body.appendChild(elemento);
+    setTimeout(() => elemento.remove(), 6500);
+  }
+}
+
+// REPRODUCTOR MUSICAL
+const canciones = [
+  {
+    audio: document.getElementById("audio1"),
+    estado: document.getElementById("estado1"),
+    nombre: "Traicionera — La Única Tropical"
+  },
+  {
+    audio: document.getElementById("audio2"),
+    estado: document.getElementById("estado2"),
+    nombre: "Traicionera — Sebastián Yatra"
+  }
+];
+
+function actualizarEstadoMusica() {
+  const activa = canciones.some(
+    cancion => !cancion.audio.paused && !cancion.audio.ended
+  );
+
+  document.body.classList.toggle("music-playing", activa);
+
+  if (!activa) {
+    document.getElementById("estadoMusica").textContent =
+      "🎧 Elige la banda sonora de tu momento";
+  }
+}
+
+async function reproducirCancion(indice) {
+  const seleccionada = canciones[indice];
+
+  canciones.forEach((cancion, i) => {
+    if (i !== indice) cancion.audio.pause();
+  });
+
+  try {
+    await seleccionada.audio.play();
+    document.getElementById("estadoMusica").textContent =
+      "🎶 Sonando: " + seleccionada.nombre;
+  } catch (error) {
+    document.getElementById("estadoMusica").textContent =
+      "No se pudo reproducir. Comprueba que el archivo de audio exista.";
+    seleccionada.estado.textContent =
+      "Revisa el nombre, la ruta y el formato del archivo.";
+  }
+}
+
+function pausarCanciones() {
+  canciones.forEach(cancion => cancion.audio.pause());
+  document.getElementById("estadoMusica").textContent =
+    "⏸ Música en pausa";
+}
+
+canciones.forEach((cancion, indice) => {
+  const audio = cancion.audio;
+
+  audio.addEventListener("play", () => {
+    canciones.forEach((otra, i) => {
+      if (i !== indice && !otra.audio.paused) {
+        otra.audio.pause();
+      }
+    });
+
+    document.body.classList.add("music-playing");
+    document.getElementById("estadoMusica").textContent =
+      "🎶 Sonando: " + cancion.nombre;
+  });
+
+  audio.addEventListener("pause", actualizarEstadoMusica);
+
+  audio.addEventListener("ended", () => {
+    actualizarEstadoMusica();
+    cancion.estado.textContent = "Canción terminada. Puedes reproducirla otra vez.";
+  });
+
+  audio.addEventListener("loadedmetadata", () => {
+    cancion.estado.textContent =
+      "✅ Audio cargado · Duración: " +
+      formatoTiempo(audio.duration);
+  });
+
+  audio.addEventListener("error", () => {
+    cancion.estado.textContent =
+      "⚠️ No se pudo cargar el audio. Comprueba el nombre y la ubicación.";
+  });
+});
+
+function formatoTiempo(segundos) {
+  if (!Number.isFinite(segundos)) return "--:--";
+  const minutos = Math.floor(segundos / 60);
+  const resto = Math.floor(segundos % 60);
+  return minutos + ":" + String(resto).padStart(2, "0");
+}
+
+// BRILLOS SUAVES DE FONDO
+// Los corazones adicionales aparecen únicamente cuando se pulsa un botón.
+</script>
+</body>
+</html>
